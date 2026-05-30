@@ -1,5 +1,6 @@
+'use client'
 import { useState, useEffect } from "react"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import api from "@/lib/axios"
 import { saveAuth, clearAuth, getUser, isAuthenticated } from "@/lib/auth"
 import { User, AuthResponse } from "@/types"
