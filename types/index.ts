@@ -3,7 +3,7 @@ export interface User {
     nombre: string
     apellido: string
     email: string
-    role: " ADMIN" | "CLIENT"
+    role: "ADMIN" | "CLIENT"
 }
 
 export interface Category {
