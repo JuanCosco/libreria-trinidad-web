@@ -3,13 +3,15 @@ import { useState, useEffect } from "react"
 import api from "@/lib/axios"
 import { Cart } from "@/types"
 import { isAuthenticated } from "@/lib/auth"
+import { useAuth } from '@/hooks/useAuth'
 
 export const useCart = () => {
+    const { user } = useAuth()
     const [cart, setCart] = useState<Cart | null>(null)
     const [loading, setLoading] = useState(true)
 
     const fetchCart = async () => {
-        if (!isAuthenticated()) return
+        if (!user) return
         setLoading(true)
         try {
             const { data } = await api.get("/cart")
@@ -23,7 +25,7 @@ export const useCart = () => {
 
     useEffect(() => {
         fetchCart()
-    }, [])
+    }, [user])
 
     const addToCart = async (bookId: string, cantidad: number = 1) => {
         const { data } = await api.post("/cart/items", { bookId, cantidad })
@@ -48,5 +50,5 @@ export const useCart = () => {
 
     const itemCount = cart?.items.reduce((sum, item) => sum + item.cantidad, 0) ?? 0
 
-    return { cart, loading, addToCart, updateItem, removeItem, clearCart, itemCount }
+    return { cart, loading, fetchCart, addToCart, updateItem, removeItem, clearCart, itemCount }
 }
