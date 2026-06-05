@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/hooks/useCart'
+import { useAuth } from '@/hooks/useAuth'
 import { isAuthenticated } from '@/lib/auth'
 import { ShoppingCart } from 'lucide-react'
 import { useState } from 'react'
@@ -14,12 +15,13 @@ interface BookCardProps {
 
 export default function BookCard({ book }: BookCardProps) {
     const { addToCart } = useCart()
+    const { user } = useAuth()
     const [adding, setAdding] = useState(false)
 
     const precioFinal = book.precio - (book.precio * book.descuento / 100)
 
     const handleAddToCart = async () => {
-        if (!isAuthenticated()) {
+        if (!user) {
             window.location.href = '/login'
             return
         }
