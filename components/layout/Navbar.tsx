@@ -58,6 +58,10 @@ export default function Navbar() {
                 )}
               </Link>
 
+              <Link href="/orders" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Mis órdenes
+              </Link>
+
               {/* Usuario */}
               <span className="text-sm text-muted-foreground flex items-center gap-1">
                 <User className="h-4 w-4" />
