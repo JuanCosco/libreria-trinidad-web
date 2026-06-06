@@ -80,8 +80,9 @@ export default function AdminBooksPage() {
             <div className="flex items-center justify-between mb-6">
                 <h1 className="text-2xl font-bold">Libros</h1>
                 <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) { setForm(emptyForm); setEditing(null) } }}>
-                    <DialogTrigger>
-                        <Button size="sm"><Plus className="h-4 w-4 mr-1" />Nuevo libro</Button>
+                    <DialogTrigger className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+                        <Plus className="h-4 w-4" />
+                        Nuevo libro
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
@@ -152,10 +153,8 @@ export default function AdminBooksPage() {
                                         <Pencil className="h-4 w-4" />
                                     </Button>
                                     <AlertDialog>
-                                        <AlertDialogTrigger>
-                                            <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
+                                        <AlertDialogTrigger className="inline-flex items-center justify-center h-9 w-9 rounded-md text-destructive hover:bg-muted transition-colors">
                                                 <Trash2 className="h-4 w-4" />
-                                            </Button>
                                         </AlertDialogTrigger>
                                         <AlertDialogContent>
                                             <AlertDialogHeader>

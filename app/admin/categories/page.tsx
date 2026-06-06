@@ -12,49 +12,50 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Plus, Pencil, Trash2 } from 'lucide-react'
 
 export default function AdminCategoriesPage() {
-    const [categories, setCategories] = useState<Category[]>([])
-    const [nombre, setNombre] = useState('')
-    const [editing, setEditing] = useState<string | null>(null)
-    const [open, setOpen] = useState(false)
+  const [categories, setCategories] = useState<Category[]>([])
+  const [nombre, setNombre] = useState('')
+  const [editing, setEditing] = useState<string | null>(null)
+  const [open, setOpen] = useState(false)
 
-    const fetchCategories = async () => {
-        const { data } = await api.get('/categories')
-        setCategories(data.categories)
+  const fetchCategories = async () => {
+    const { data } = await api.get('/categories')
+    setCategories(data.categories)
+  }
+
+  useEffect(() => { fetchCategories() }, [])
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (editing) {
+      await api.patch(`/categories/${editing}`, { nombre })
+    } else {
+      await api.post('/categories', { nombre })
     }
+    setNombre('')
+    setEditing(null)
+    setOpen(false)
+    fetchCategories()
+  }
 
-    useEffect(() => { fetchCategories() }, [])
+  const handleEdit = (cat: Category) => {
+    setNombre(cat.nombre)
+    setEditing(cat.id)
+    setOpen(true)
+  }
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        if (editing) {
-            await api.patch(`/categories/${editing}`, { nombre })
-        } else {
-            await api.post('/categories', { nombre })
-        }
-        setNombre('')
-        setEditing(null)
-        setOpen(false)
-        fetchCategories()
-    }
+  const handleDelete = async (id: string) => {
+    await api.delete(`/categories/${id}`)
+    fetchCategories()
+  }
 
-    const handleEdit = (cat: Category) => {
-        setNombre(cat.nombre)
-        setEditing(cat.id)
-        setOpen(true)
-    }
-
-    const handleDelete = async (id: string) => {
-        await api.delete(`/categories/${id}`)
-        fetchCategories()
-    }
-
-    return (
+  return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Categorías</h1>
         <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) { setNombre(''); setEditing(null) } }}>
-          <DialogTrigger>
-            <Button size="sm"><Plus className="h-4 w-4 mr-1" />Nueva categoría</Button>
+          <DialogTrigger className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+            <Plus className="h-4 w-4" />
+            Nuevo Categoria
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
@@ -90,10 +91,8 @@ export default function AdminCategoriesPage() {
                     <Pencil className="h-4 w-4" />
                   </Button>
                   <AlertDialog>
-                    <AlertDialogTrigger>
-                      <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                    <AlertDialogTrigger className="inline-flex items-center justify-center h-9 w-9 rounded-md text-destructive hover:bg-muted transition-colors">
+                      <Trash2 className="h-4 w-4" />
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
