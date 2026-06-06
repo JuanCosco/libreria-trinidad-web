@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
-import { useRouter } from 'next/navigation'
 import api from '@/lib/axios'
 import { Order } from '@/types'
 import { Badge } from '@/components/ui/badge'
@@ -11,6 +10,9 @@ import { ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import AuthGuard from '@/components/layout/AuthGuard'
+// Importamos la función para generar el PDF
+import { generateOrderPDF } from '@/lib/pdf'
+import { Download } from 'lucide-react'
 
 const statusLabel: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' }> = {
     PENDING: { label: 'Pendiente', variant: 'secondary' },
@@ -66,7 +68,13 @@ export default function OrdersPage() {
                                                 })}
                                             </p>
                                         </div>
-                                        <Badge variant={status.variant}>{status.label}</Badge>
+                                        <div className="flex items-center gap-2">
+                                            <Badge variant={status.variant}>{status.label}</Badge>
+                                            <Button variant="outline" size="sm" onClick={() => generateOrderPDF(order)} >
+                                                <Download className="h-4 w-4 mr-1" />
+                                                PDF
+                                            </Button>
+                                        </div>
                                     </div>
                                     <Separator />
                                     <div className="space-y-2">

@@ -6,6 +6,9 @@ import { Order } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
+import { generateOrderPDF } from '@/lib/pdf'
+import { Download } from 'lucide-react'
 
 const statusOptions = ['PENDING', 'PAID', 'CANCELLED']
 const statusLabel: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' }> = {
@@ -41,6 +44,7 @@ export default function AdminOrdersPage() {
                         <TableHead>Items</TableHead>
                         <TableHead>Total</TableHead>
                         <TableHead>Estado</TableHead>
+                        <TableHead>Acciones</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -66,6 +70,12 @@ export default function AdminOrdersPage() {
                                             ))}
                                         </SelectContent>
                                     </Select>
+                                </TableCell>
+                                <TableCell>
+                                    <Button variant="outline" size="sm" onClick={() => generateOrderPDF(order)}>
+                                        <Download className="h-4 w-4 mr-1" />
+                                        PDF
+                                    </Button>
                                 </TableCell>
                             </TableRow>
                         )
