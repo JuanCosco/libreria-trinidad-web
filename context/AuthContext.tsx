@@ -22,10 +22,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
 
   useEffect(() => {
+    console.log('[AuthContext] useEffect corriendo...')
+    console.log('[AuthContext] isAuthenticated:', isAuthenticated())
+    console.log('[AuthContext] getUser:', getUser())
+    console.log('[AuthContext] montado, leyendo localStorage...')
+
     if (isAuthenticated()) {
-      setUser(getUser())
+      const u = getUser()
+      console.log('[AuthContext] usuario encontrado:', u?.email)
+      setUser(u)
+    } else {
+      console.log('[AuthContext] No hay sesión en localStorage')
     }
     setLoading(false)
+    console.log('[AuthContext] loading: false')
   }, [])
 
   const login = async (email: string, password: string) => {
