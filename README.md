@@ -20,7 +20,7 @@ Interfaz web para una tienda online de libros construida con Next.js 16, Tailwin
 - **PDF:** jsPDF
 
 ## Estructura
-
+```text
 app/
 ├─ (public)/ # Catálogo y detalle de libros
 ├─ (auth)/ # Login y registro
@@ -36,7 +36,7 @@ context/ # AuthContext, CartContext
 hooks/ # useAuth, useCart
 lib/ # axios, auth helpers, pdf
 types/ # Interfaces TypeScript
-
+```
 ## Páginas
 
 | Ruta                | Descripción                | Acceso      |
