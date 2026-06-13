@@ -4,8 +4,8 @@ Interfaz web para una tienda online de libros construida con Next.js 16, Tailwin
 
 ## Ecosistema
 
-| Repositorio                                                             | Descripción                                          |
-| ----------------------------------------------------------------------- | ---------------------------------------------------- |
+| Repositorio                                                                             | Descripción                          |
+| --------------------------------------------------------------------------------------- | ------------------------------------ |
 | [libreria-trinidad-api](https://github.com/JuanCosco/libreria-trinidad-api)             | REST API con Express + Prisma + PostgreSQL           |
 | **libreria-trinidad-web** ← estás aquí                                                  | Frontend Next.js 16 + Tailwind + shadcn              |
 | [libreria-trinidad-analytics](https://github.com/JuanCosco/libreria-trinidad-analytics) | Capa analytics con dbt sobre la misma DB del backend |
@@ -22,18 +22,20 @@ Interfaz web para una tienda online de libros construida con Next.js 16, Tailwin
 ## Estructura
 
 app/
-├── (public)/ # Catálogo y detalle de libros
-├── (auth)/ # Login y registro
-├── (protected)/ # Carrito y órdenes (requiere login)
-└── admin/ # Panel de administración (requiere ADMIN)
+├── (public)/      # Catálogo y detalle de libros
+├── (auth)/        # Login y registro
+├── (protected)/   # Carrito y órdenes (requiere login)
+└── admin/         # Panel de administración (requiere ADMIN)
+
 components/
-├── ui/ # Componentes shadcn
-├── layout/ # Navbar, AuthGuard
-└── books/ # BookCard
-context/ # AuthContext, CartContext
-hooks/ # useAuth, useCart
-lib/ # axios, auth helpers, pdf
-types/ # Interfaces TypeScript
+├── ui/            # Componentes shadcn
+├── layout/        # Navbar, AuthGuard
+└── books/         # BookCard
+
+context/           # AuthContext, CartContext
+hooks/             # useAuth, useCart
+lib/               # axios, auth helpers, pdf
+types/             # Interfaces TypeScript
 
 ## Páginas
 
@@ -55,7 +57,7 @@ types/ # Interfaces TypeScript
 
 | Catálogo                                  | Carrito                               | Admin                                |
 | ----------------------------------------- | ------------------------------------- | ------------------------------------ |
-| ![Catálogo](img/Libros.png) | ![Carrito](docs/screenshots/cart.png) | ![Admin](docs/screenshots/admin.png) |
+| ![Catálogo](img/Libros.png) | ![Carrito](img/Carrito.jpg) | ![Admin](img/Admin.jpg) |
 
 ## Instalación
 
