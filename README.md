@@ -22,20 +22,20 @@ Interfaz web para una tienda online de libros construida con Next.js 16, Tailwin
 ## Estructura
 ```text
 app/
-├─ (public)/ # Catálogo y detalle de libros
-├─ (auth)/ # Login y registro
-├─ (protected)/ # Carrito y órdenes (requiere login)
-└─ admin/ # Panel de administración (requiere ADMIN)
+├── (public)/      # Catálogo y detalle de libros
+├── (auth)/        # Login y registro
+├── (protected)/   # Carrito y órdenes (requiere login)
+└── admin/         # Panel de administración (requiere ADMIN)
 
 components/
-├─ ui/ # Componentes shadcn
-├─ layout/ # Navbar, AuthGuard
-└─ books/ # BookCard
+├── ui/            # Componentes shadcn
+├── layout/        # Navbar, AuthGuard
+└── books/         # BookCard
 
-context/ # AuthContext, CartContext
-hooks/ # useAuth, useCart
-lib/ # axios, auth helpers, pdf
-types/ # Interfaces TypeScript
+context/           # AuthContext, CartContext
+hooks/             # useAuth, useCart
+lib/               # axios, auth helpers, pdf
+types/             # Interfaces TypeScript
 ```
 ## Páginas
 
